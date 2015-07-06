@@ -1,4 +1,4 @@
-FROM codeclimate/alpine-ruby:0.0.2
+FROM codeclimate/alpine-ruby:b36
 
 WORKDIR /usr/src/app
 COPY . /usr/src/app
