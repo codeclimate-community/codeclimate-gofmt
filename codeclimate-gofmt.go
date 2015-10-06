@@ -54,7 +54,7 @@ func main() {
 					Categories:        []string{"Style"},
 					Location: &engine.Location{
 						Path: path,
-						Lines: &engine.Position{
+						Lines: &engine.LinesOnlyPosition{
 							Begin: 1,
 							End:   1,
 						},
