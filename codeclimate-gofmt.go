@@ -50,7 +50,7 @@ func main() {
 					Type:              "issue",
 					Check:             "GoFmt/Style/GoFmt",
 					Description:       "Your code does not pass gofmt in " + numHunks + " places. Go fmt your code!",
-					RemediationPoints: int32(500 * len(diffs[0].Hunks)),
+					RemediationPoints: int32(50000 * len(diffs[0].Hunks)),
 					Categories:        []string{"Style"},
 					Location: &engine.Location{
 						Path: path,
