@@ -15,13 +15,13 @@ func main() {
 
 	config, err := engine.LoadConfig()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading config: %s", err)
+		fmt.Fprintf(os.Stderr, "Error loading config: %v\n", err)
 		os.Exit(1)
 	}
 
 	analysisFiles, err := engine.GoFileWalk(rootPath, engine.IncludePaths(rootPath, config))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error initializing: %s", err)
+		fmt.Fprintf(os.Stderr, "Error initializing: %v\n", err)
 		os.Exit(1)
 	}
 
@@ -29,13 +29,24 @@ func main() {
 		cmd := exec.Command("gofmt", "-d", path)
 
 		out, err := cmd.CombinedOutput()
+
 		if err != nil {
-			return
+			fmt.Fprintf(os.Stderr, "Error analyzing path: %v\n", path)
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+
+			if out != nil {
+				s := string(out[:])
+				fmt.Fprintf(os.Stderr, "Gofmt output: %v\n", s)
+			}
+
+			os.Exit(1)
 		}
 
 		diffs, err := diff.ParseMultiFileDiff(out)
 		if err != nil {
-			return
+			fmt.Fprintf(os.Stderr, "Error parsing diff for output: %v\n", out)
+			fmt.Fprintf(os.Stderr, "\nError: %v\n", err)
+			os.Exit(1)
 		}
 
 		if diffs != nil && diffs[0] != nil && len(diffs[0].Hunks) > 0 {
@@ -61,8 +72,6 @@ func main() {
 			engine.PrintIssue(issue)
 		}
 	}
-
-	os.Exit(0)
 }
 
 func pluralizePlace(quant int) string {
