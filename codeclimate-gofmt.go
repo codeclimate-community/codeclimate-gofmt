@@ -39,14 +39,16 @@ func main() {
 		}
 
 		if diffs != nil && diffs[0] != nil && len(diffs[0].Hunks) > 0 {
-			numHunks := strconv.Itoa((len(diffs[0].Hunks)))
+			numHunks := len(diffs[0].Hunks)
+
+			description := "Your code does not pass gofmt in " + strconv.Itoa(numHunks) + " " + pluralizePlace(numHunks) + ". Go fmt your code!"
 			path := strings.SplitAfter(path, rootPath)[1]
 
 			issue := &engine.Issue{
 				Type:              "issue",
 				Check:             "GoFmt/Style/GoFmt",
-				Description:       "Your code does not pass gofmt in " + numHunks + " places. Go fmt your code!",
-				RemediationPoints: int32(50000 * len(diffs[0].Hunks)),
+				Description:       description,
+				RemediationPoints: int32(50000 * numHunks),
 				Categories:        []string{"Style"},
 				Location: &engine.Location{
 					Path: path,
@@ -61,4 +63,12 @@ func main() {
 	}
 
 	os.Exit(0)
+}
+
+func pluralizePlace(quant int) string {
+	if quant > 1 {
+		return "places"
+	} else {
+		return "place"
+	}
 }
