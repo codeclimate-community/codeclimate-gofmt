@@ -1,22 +1,27 @@
 package main
 
-import "github.com/codeclimate/cc-engine-go/engine"
-import "sourcegraph.com/sourcegraph/go-diff/diff"
-import "os/exec"
-import "strconv"
-import "os"
-import "strings"
+import (
+	"github.com/codeclimate/cc-engine-go/engine"
+	"sourcegraph.com/sourcegraph/go-diff/diff"
+	"os/exec"
+	"strconv"
+	"os"
+	"strings"
+	"fmt"
+)
 
 func main() {
 	rootPath := "/code/"
 
 	config, err := engine.LoadConfig()
 	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error loading config: %s", err)
 		os.Exit(1)
 	}
 
 	analysisFiles, err := engine.GoFileWalk(rootPath, engine.IncludePaths(rootPath, config))
 	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error initializing: %s", err)
 		os.Exit(1)
 	}
 
