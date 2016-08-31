@@ -26,7 +26,8 @@ func main() {
 	}
 
 	for _, path := range analysisFiles {
-		cmd := exec.Command("/usr/src/app/bin/gofmt", "-d", path)
+		cmd := exec.Command("gofmt", "-d", path)
+
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			return
