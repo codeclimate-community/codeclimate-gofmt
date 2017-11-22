@@ -5,9 +5,13 @@ jobs:
     environment:
       CLOUDSDK_CORE_DISABLE_PROMPTS: 1
       PRIVATE_REGISTRY: us.gcr.io/code_climate
-      IMAGE_NAME: ${PRIVATE_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:b${CIRCLE_BUILD_NUM}
 
     steps:
+      # CircleCI 2.0 doesn't expand env vars yet so we have to do it manually.
+      - run:
+          name: Env
+          command: |
+            echo 'export IMAGE_NAME="${PRIVATE_REGISTRY}/${CIRCLE_PROJECT_REPONAME}:b${CIRCLE_BUILD_NUM}"' >> ${BASH_ENV}
       - checkout
       - run:
           name: Build image
