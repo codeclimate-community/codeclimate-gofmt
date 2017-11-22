@@ -1,0 +1,13 @@
+{
+  "name": "gofmt",
+  "description": "Gofmt tells if a Go program is not properly formatted.",
+  "maintainer": {
+    "name": "Code Climate",
+    "email": "hello@codeclimate.com"
+  },
+  "languages": [
+    "Go"
+  ],
+  "version": "1.0.0/go-1.8.4-r0",
+  "spec_version": "0.3.1"
+}
