@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -e
-
-apk add --no-cache jq
-gofmt_version=$(apk info --no-cache go | grep installed | cut -d ' ' -f 1)
-full_version="$(jq -r .version /engine.json | cut -d / -f 1)/${gofmt_version}"
-jq ".version=\"${full_version}\"" /engine.json > /tmp/engine.json &&
-  cat /tmp/engine.json > /engine.json
