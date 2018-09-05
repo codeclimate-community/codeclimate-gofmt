@@ -36,4 +36,4 @@ explicit.
 
 For help with Gofmt, [check out their documentation](https://golang.org/cmd/gofmt/).
 
-If you're running into a Code Climate issue, first look over this project's [GitHub Issues](https://github.com/codeclimate/codeclimate-rubocop/issues), as your question may have already been covered. If not, [go ahead and open a support ticket with us](https://codeclimate.com/help).
+If you're running into a Code Climate issue, first look over this project's [GitHub Issues](https://github.com/codeclimate-community/codeclimate-gofmt/issues), as your question may have already been covered. If not, [go ahead and open a support ticket with us](https://codeclimate.com/help).
