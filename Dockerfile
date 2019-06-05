@@ -1,4 +1,4 @@
-ARG BASE=1.9.3-alpine3.7
+ARG BASE=1.12.5-alpine3.9
 FROM golang:${BASE} as build
 
 WORKDIR /usr/src/app
