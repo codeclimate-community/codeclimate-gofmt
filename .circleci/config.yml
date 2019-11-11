@@ -24,7 +24,7 @@ jobs:
               circleci step halt
             fi
       - run: make image
-      - run: echo "$GCR_JSON_KEY" | docker login -u _json_key --password-stdin us.gcr.io
+      - run: echo "$GCLOUD_JSON_KEY_BASE64" | docker login -u _json_key --password-stdin us.gcr.io
       - run:
           name: Push image to GCR
           command: |
