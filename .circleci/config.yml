@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Push image to GCR
           command: |
-            docker tag $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME \
+            docker tag codeclimate/codeclimate-gofmt \
               us.gcr.io/code-climate/codeclimate-gofmt:b$CIRCLE_BUILD_NUM
             docker push us.gcr.io/code-climate/codeclimate-gofmt:b$CIRCLE_BUILD_NUM
 
