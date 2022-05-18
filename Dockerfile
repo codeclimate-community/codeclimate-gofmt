@@ -9,6 +9,7 @@ RUN export go_version=$(go version | cut -d ' ' -f 3) && \
     cat engine.json.template | jq '.version = .version + "/" + env.go_version' > ./engine.json
 
 COPY codeclimate-gofmt.go ./
+COPY go.mod go.sum ./
 RUN apk add --no-cache git
 RUN go get -t -d -v .
 RUN go build -o codeclimate-gofmt .
