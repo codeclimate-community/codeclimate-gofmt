@@ -1,13 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"github.com/codeclimate/cc-engine-go/engine"
-	"sourcegraph.com/sourcegraph/go-diff/diff"
+	"github.com/sourcegraph/go-diff/diff"
+	"os"
 	"os/exec"
 	"strconv"
-	"os"
 	"strings"
-	"fmt"
 )
 
 func main() {
