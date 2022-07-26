@@ -1,5 +1,12 @@
 version: 2
 
+init: &init
+  run:
+    name: init
+    command: |
+      echo '. .circleci/shared.bash' >> "$BASH_ENV"
+      . .circleci/shared.bash
+
 jobs:
   build:
     machine:
@@ -15,6 +22,7 @@ jobs:
     working_directory: ~/codeclimate/codeclimate-gofmt
     steps:
       - checkout
+      - *init
       - run:
           name: Validate owner
           command: |
@@ -31,6 +39,7 @@ jobs:
             docker tag codeclimate/codeclimate-gofmt \
               us.gcr.io/code-climate/codeclimate-gofmt:b$CIRCLE_BUILD_NUM
             docker push us.gcr.io/code-climate/codeclimate-gofmt:b$CIRCLE_BUILD_NUM
+      - run: send_webhook
 
 workflows:
   version: 2
@@ -43,6 +52,3 @@ workflows:
           filters:
             branches:
               only: /master|channel\/[\w-]+/
-notify:
-  webhooks:
-    - url: https://cc-slack-proxy.herokuapp.com/circle
