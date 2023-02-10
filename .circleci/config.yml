@@ -46,6 +46,7 @@ workflows:
     jobs:
       - build
       - release_images:
+          context: Quality
           requires:
             - build
           filters:
